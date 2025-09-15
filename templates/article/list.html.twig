@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	</head>
+	<body>
+		<h1 class="text-4xl font-bold mb-6">Liste des articles</h1>
+
+		<div class="flex flex-wrap gap-4">
+			{% for a in articles %}
+				<div class="border rounded p-4">
+					<h2 class="text-2xl font-bold mb-2">{{ a.titre }}</h2>
+					<p class="text-gray-700">{{ a.contenu|slice(0,150) }}...</p>
+					<p class="text-sm text-gray-500">Publié le
+						{{ a.date|date("d/m/Y") }}</p>
+				</div>
+			{% endfor %}
+		</div>
+	</body>
+</html>
