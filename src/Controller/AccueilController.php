@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends AbstractController {
 
-    #[Route('/')]
+    #[Route('/', name: 'app_home')]
     public function index() {
 
         $cdj = rand(1, 100);
