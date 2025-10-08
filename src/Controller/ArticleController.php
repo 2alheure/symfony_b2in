@@ -10,10 +10,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 final class ArticleController extends AbstractController {
+    #[IsGranted('ROLE_ADMIN')] // Seul un utilisateur avec le rôle ROLE_ADMIN peut accéder à cette route
     #[Route('/article/create', name: 'app_article')]
     public function index(EntityManagerInterface $em, Request $request): Response {
+
+        // $this->isGranted('ROLE_ADMIN'); // Vérifie que l'utilisateur a le rôle ROLE_ADMIN (boolean)
+
+        $this->getUser(); // Récupère l'utilisateur actuellement connecté
+
         $article = new Article();
 
         $form = $this->createForm(ArticleType::class, $article);
