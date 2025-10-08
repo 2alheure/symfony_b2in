@@ -31,6 +31,17 @@ final class ArticleController extends AbstractController {
         ]);
     }
 
+    #[Route('/article/{id}', name: 'app_article_show')]
+    public function show(Article $article, ArticleRepository $ar): Response {
+        if (!$article) {
+            throw $this->createNotFoundException('Article non trouvé');
+        }
+
+        return $this->render('article/show.html.twig', [
+            'article' => $article,
+        ]);
+    }
+
     #[Route('/articles', name: 'app_article_list')]
     public function list(ArticleRepository $ar): Response {
         $articles = $ar->findAll();
